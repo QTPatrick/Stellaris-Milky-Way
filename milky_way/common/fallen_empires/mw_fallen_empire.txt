@@ -1,0 +1,44 @@
+# Materialist
+fallen_empire_1 = {
+	weight_modifier = {
+		base = 100
+		modifier = {
+			factor = 0
+			galaxy_size = large
+	}
+}
+
+# Spiritualist
+fallen_empire_2 = {
+	weight_modifier = {
+		base = 100
+	}
+}
+
+# Xenophile
+fallen_empire_3 = {
+	weight_modifier = {
+		base = 100
+	}
+}
+
+# Xenophobe
+fallen_empire_4 = {
+	weight_modifier = {
+		base = 100
+	}
+}
+
+# Machine
+fallen_machine_empire = {
+	weight_modifier = {
+		base = 100
+	}
+}
+
+# Hive
+fallen_hive_empire = {
+	weight_modifier = {
+		base = 100
+	}
+}

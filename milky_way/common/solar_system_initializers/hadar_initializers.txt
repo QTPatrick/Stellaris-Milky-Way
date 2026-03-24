@@ -1,0 +1,69 @@
+# Hadar
+# Class A Star
+hadar = {
+
+	name = "Hadar"
+	class = sc_black_hole
+
+	asteroid_belt = { type = rocky_asteroid_belt radius = 40 }
+	asteroid_belt = { type = rocky_asteroid_belt radius = 50 }
+
+	planet = {
+		count = 1
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+
+    flags = { 198_eridani }
+	#init_effect = { connect_neighbour_stars = yes }
+	#pc_black hole
+	planet = { 
+        name = "198 Eridani" class = pc_black_hole flags = { 198_eridani_black_hole } orbit_distance = 0 orbit_angle = 1 size = 30 has_ring = no 
+        init_effect = {
+            save_event_target_as = 198_eridani_black_hole
+			create_corillian_remnant_country = yes
+			create_fleet = {
+				name = "NAME_Last_Refuge"
+				effect = {
+					set_owner = event_target:corillian_remnant_country
+					create_ship = { name = random design = "NAME_Pirate_Nest" graphical_culture = "pirate_01" }
+					set_location = { target = event_target:198_eridani_black_hole distance = 30 angle = random }
+				}
+			}
+			event_target:corillian_remnant_country = {
+				create_leader = {
+					class = commander
+					species = event_target:corillian_remnant_country
+					name = random
+					skill = 4
+				}
+				create_fleet = {
+					name = "NAME_Legacy_Of_Corill"
+					effect = {
+						set_owner = event_target:corillian_remnant_country
+						while = {
+							count = 12
+							create_ship = { name = random design = "NAME_Brigand" graphical_culture = "pirate_01" }
+						}
+						while = {
+							count = 20
+							create_ship = { name = random design = "NAME_Skull" graphical_culture = "pirate_01" }
+						}
+						set_location = event_target:198_eridani_black_hole
+						assign_leader = last_created_leader
+					}
+				}
+			}
+        }
+    }
+    planet = { class = "pc_barren" orbit_distance = 80 orbit_angle = 30 size = 8 has_ring = no }
+    planet = { class = "pc_barren" orbit_distance = 30 orbit_angle = 145 size = 15 has_ring = no }
+    planet = {
+        class = "pc_barren_cold"
+        orbit_distance = 40
+        orbit_angle = 240
+        size = 16
+        has_ring = no
+        moon = { orbit_distance = 10 class = "pc_barren_cold" size = 7 orbit_angle = { min = 30 max = 270 } }
+    }
+}
