@@ -3,8 +3,16 @@ fallen_empire_1 = {
 	weight_modifier = {
 		base = 100
 		modifier = {
+			calc_true_if = {
+				amount >= 3
+				NOT = { host_has_dlc = synth }
+				NOT = { host_has_dlc = bio }
+				check_galaxy_setup_value = { setting = num_fallen_empires value >= 1 }
+				check_galaxy_setup_value = { setting = num_fallen_empires value >= 2 }
+				check_galaxy_setup_value = { setting = num_fallen_empires value >= 3 }
+			}
 			factor = 0
-			galaxy_size = large
+		}
 	}
 }
 

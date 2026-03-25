@@ -1,18 +1,18 @@
 static_galaxy_scenario = {
 	name = "Milky Way"
 	priority = 5
-	radius = 450
-	num_empires = { min = 0 max = 30 }
-	num_empire_default = 15
+	supports_shape = bar
+	num_empires = { min = 0 max = 24 }
+	num_empire_default = 12
 	fallen_empire_default = 4
 	fallen_empire_max = 5
-	marauder_empire_default = 3
+	marauder_empire_default = 0
 	marauder_empire_max = 3
-	advanced_empire_default = 4
-	colonizable_planet_odds = 1.0
-	primitive_odds = 1.0
+	advanced_empire_default = 6
+	colonizable_planet_odds = 0.5
+	primitive_odds = 0.5
 	crisis_strength = 1.5
-	extra_crisis_strength = { 10 25 }
+	extra_crisis_strength = { 10 25}
 	num_wormhole_pairs = { min = 0 max = 5 }
 	num_wormhole_pairs_default = 1
 	num_gateways = { min = 0 max = 5 }
@@ -20,23 +20,21 @@ static_galaxy_scenario = {
 	random_hyperlanes = no
 	core_radius = 0
 
-	supports_shape = elliptical
-	supports_shape = spiral_2
-	supports_shape = spiral_3
-	supports_shape = spiral_4
-	supports_shape = spiral_6
-	supports_shape = ring
-	supports_shape = bar
-	supports_shape = starburst
-	supports_shape = cartwheel
-	supports_shape = spoked
-
-	system = { id = "0" name = "" position = { x = 0 y = 0 z = 5} initializer = hyacinth_system }
 	system = { id = "1" name = "" position = { x = 0 y = -260 z = 0} initializer = sol_system_initializer }
-	system = { id = "2" name = "" position = { x = -5 y = -265 z = 0} initializer = sol_neighbor_t1 }
-	system = { id = "3" name = "" position = { x = 5 y = -255 z = 0} initializer = sol_neighbor_t1_first_colony }
+	system = { id = "2" name = "" position = { x = -5 y = -265 z = 0} initializer = sol_neighbor_t1 }		
+	system = {
+		trigger = { num_guaranteed_colonies >= 1 }
+		id = "3" name = "" position = { x = 5 y = -255 z = 0} initializer = sol_neighbor_t1_first_colony }
+	system = {
+		trigger	= { num_guaranteed_colonies < 1 }
+		id = "3" name = "" position = { x = 5 y = -255 z = 0} initializer = "sol_neighbor_t1_no_guaranteed_colony"
 	system = { id = "4" name = "" position = { x = 5 y = -265 z = 0} initializer = sol_neighbor_t2 }
-	system = { id = "5" name = "" position = { x = 10 y = -270 z = 0} initializer = sol_neighbor_t2_second_colony }
+	system = {
+		trigger = { num_guaranteed_colonies >= 2 }
+		id = "5" name = "" position = { x = 10 y = -270 z = 0} initializer = sol_neighbor_t2_second_colony }
+	system = {
+		trigger = { num_guaranteed_colonies < 2 }
+		id = "5" name = "" position = { x = 10 y = -270 z = 0} initializer = sol_neighbor_t2_no_guaranteed_colony }
 	system = { id = "6" name = "" position = { x = -35 y = -255 z = 0} initializer = une_deneb_system }
 	system = { id = "7" name = "" position = { x = -35 y = 33 z = 0}  }
 	system = { id = "8" name = "" position = { x = -35 y = 33 z = 0}  }
@@ -46,39 +44,29 @@ static_galaxy_scenario = {
 	system = { id = "12" name = "" position = { x = 7 y = 33 z = 0}  }
 	system = { id = "13" name = "" position = { x = 7 y = 33 z = 0}  }
 	system = { id = "14" name = "" position = { x = 7 y = 33 z = 0}  }
+}
+trigger = { 
+	system = { id = "0" name = "" position = { x = 0 y = 0 z = 5} initializer = init_sol_geocentric } # can substitute mindwarden_sol_system_init
 
-# black holes: 
-#	"Sithonis_Maelstrom"
-#	"Ter_Meku_Black_Hole"
-#	"Dubious_Abyss"
-#	"Screeching_Abyss"
-#	"Blorgs_Bane"
-#	"Howling_Vortex"
-#	"Gaping_Maw"
-#	"Eternal_Horizon"
-#	"Lights_End"
-#	"Ascensions_End"
-#	"Quiet_Dark"
-#	"Abaddons_Demesne"
-#	"Eye_of_Hawking"
-#	"Eye_of_Bal"
-#	"Harmonious_Repose"
-#	"Hopes_End"
-#	"Enigmas_End"
-#	"Entropys_Maw"
-#	"Larkins_Singularity"
-#	"Temporal_Decay"
-#	"Succubus_Bawl"
-#	"Waledan_Black_Hole"
-#	"Proteemas_Black_Hole"
-#	"Masinissas_Demise"
-#	"Iskanders_Pride"
-#	"Maw_of_the_Truthsayer"
 
+# 	coordinate_transform = { #Subsequent systems will have the coordinates entered for them altered by these numbers
+# 		x = {
+# 			add = 10
+# 			sub = 5
+# 		}
+# 		y = {
+# 			mul = 1.1
+# 		}
+# 		z = {
+# 			div = 1.1
+# 		}
+# 	}
+
+# 	system = { id = "15" name = "" position = { x = 7 y = 33 z = 4} initializer = dyson_sphere_init_01 }
 # 	system = { id = "46" name = "" position = { x = { min = 20 max = 30 } y = 30 }  }
 # 	system = { id = "49" name = "" position = { x = 98 y = -7 }  }
 # 	system = { id = "26" name = "" position = { x = 52 y = -75 }  }
-# 	system = { id = "6" name = "" position = { x = 13 y = -70 }  }
+# 	system = { id = "6" name = "" position = { x = 13 y = -70 } spawn_design = my_design } # If system specifies spawn_design, it will ignore spawn_weight
 # 	system = { id = "9" name = "" position = { x = 8 y = -10 } initializer = shattered_ring_start spawn_weight = { base = 0 modifier = { add = 10 } } } #has_country_flag = my_country } } }
 # 	system = { id = "21" name = "" position = { x = 58 y = -9 }  }
 # 	system = {
@@ -99,7 +87,7 @@ static_galaxy_scenario = {
 # 	system = { id = "45" name = "" position = { x = -48 y = 19 } }
 # 	system = { id = "40" name = "" position = { x = 9 y = -99 }  }
 # 	system = { id = "25" name = "" position = { x = -53 y = 72 }  }
-# 
+# 	system = { id = "0" name = "" position = { x = 0 y = 0 z = 5}  }
 # 	system = { id = "35" name = "" position = { x = -23 y = -46 }  }
 # 	system = {
 # 		id = "47"
@@ -272,6 +260,8 @@ static_galaxy_scenario = {
 # 	add_hyperlane = { from = "48" to = "35" }
 # 	add_hyperlane = { from = "49" to = "33" }
 # 	prevent_hyperlane = { from = "47" to = "8" }
+# 	nebula = { name = "My Name" position = { x = 10 y = 30 z = 1 } radius = 20 }
+# }
 # real nebulae
 	nebula = { name = "Bok_Globule_Badlands" position = { x = 10 y = 30 z = 1 } radius = 20 }
 	nebula = { name = "Dark_Horse_Nebula" position = { x = 0 y = -90 z = 1 } radius = 20 }
@@ -279,21 +269,4 @@ static_galaxy_scenario = {
 #	nebula = { name = "Snake_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
 #	nebula = { name = "Little_Ghost_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
 #	nebula = { name = "Phantom_Streak_Miasma" position = { x = 10 y = 30 z = 1 } radius = 20 }
-# close to real nebulae
-#	nebula = { name = "Grasping_Claw_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Demons_Eye_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Weeping_Ghost_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Shining_Pearl_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#		contains Ocean Paradise origin
-#	nebula = { name = "Twin_Fangs_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Broken_Skull_Miasma" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Firecloud_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Najaggus_Veil" position = { x = 10 y = 30 z = 1 } radius = 20 }
-# fictional nebulae
-#	nebula = { name = "Picaress_Drift" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Arija_Patch" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Cebellus_Shroud" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Oracles_Grave_Nebula" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Rebenthi_Dust_Clouds" position = { x = 10 y = 30 z = 1 } radius = 20 }
-#	nebula = { name = "Rossorim_Depths" position = { x = 10 y = 30 z = 1 } radius = 20 }
-}
+
