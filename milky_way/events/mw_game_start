@@ -1,0 +1,143 @@
+namespace = milky_way
+
+### Hidden Game Start Event
+event = {
+	id = milky_way.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_global_flag = game_started
+
+
+		every_country = {
+			limit = { is_ai = no }
+			country_event = { id = country.900 days = 460 random = 60 }
+			country_event = { id = game_start.74 }
+		}
+
+		### HUMAN SPAWNS
+		if = { #FTP spawner
+			limit = {
+				has_lithoids = yes
+				num_ai_empires_setting >= 2
+				any_country = { #First check that UNE has spawned
+					has_country_flag = human_1
+					is_human_species = yes
+					NOT = { has_origin = origin_lost_colony }
+					NOT = { has_origin = origin_broken_shackles }
+				}
+				any_country = { #Then check that FTP isn't around
+					NOR = {
+						species_portrait = lith_human
+						has_country_flag = human_lithoid
+					}
+				}
+			}
+			random_list = {
+				20 = {
+					modifier = {
+						any_country = { #If the UNE is spawned and is a human we increase the chance. This means it's only a 20% if you are playing as the CoM
+							has_country_flag = human_1
+							is_ai = no
+						}
+						factor = 4
+					}
+					random_system = {
+						limit = {
+							has_owner = no
+							has_special_star_flag_trigger = no
+						}
+						spawn_system = { initializer = "ai_titawin_init" }
+					}
+				}
+				80 = {}
+			}
+		}
+		if = { #If someone is playing human lithoids and there is no UNE lets give it a chance to spawn
+			limit = {
+				any_country = {
+					has_country_flag = human_lithoid
+					species_portrait = lith_human
+				}
+				NOR = {
+					any_country = {
+						has_country_flag = human_1
+					}
+					any_system = {
+						has_star_flag = sol
+					}
+				}
+				num_ai_empires_setting >= 1
+			}
+			random_list = {
+				80 = {
+					random_system = {
+						limit = {
+							has_owner = no
+							has_special_star_flag_trigger = no
+						}
+						spawn_system = { initializer = "ai_sol_system" }
+					}
+				}
+				20 = {}
+			}
+		}
+		if = {
+			# If there are no Sols
+			limit = {
+				NOT = {
+					any_system = {
+						has_star_flag = sol
+					}
+				}
+			}
+			random_list = {
+				450 = { }	# No Sol
+				400 = {		# Pre-FTLs
+					complex_trigger_modifier = {
+						trigger = check_galaxy_setup_value
+						parameters = {
+							setting = primitive_worlds_scale
+						}
+						mode = factor
+					}
+					random_system = {
+						limit = { has_owner = no }
+						spawn_system = { initializer = "pre_ftl_init_sol" }
+					}
+					add_extra_hyperlane_to_spawned_system_effect = yes
+				}
+				100 = {		# Tomb World
+					complex_trigger_modifier = {
+						trigger = check_galaxy_setup_value
+						parameters = {
+							setting = primitive_worlds_scale
+						}
+						mode = factor
+					}
+					random_system = {
+						limit = { has_owner = no }
+						spawn_system = { initializer = "special_init_04" }
+					}
+					add_extra_hyperlane_to_spawned_system_effect = yes
+				}
+				50 = {		# Geocentric Experiment
+					complex_trigger_modifier = {
+						trigger = check_galaxy_setup_value
+						parameters = {
+							setting = habitable_worlds_scale
+						}
+						mode = factor
+						mult = 0.4 # e.g. 0.5x habitable = factor of 0.2; 5x habitable worlds = factor of 2
+					}
+					random_system = {
+						limit = { has_owner = no }
+						spawn_system = { initializer = "init_sol_geocentric" }
+					}
+					add_extra_hyperlane_to_spawned_system_effect = yes
+				}
+			}
+		}
+    }
+}
