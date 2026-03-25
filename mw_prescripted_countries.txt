@@ -1,0 +1,32 @@
+tzynn = {
+	spawn_enabled = always
+}
+yondar = {
+	spawn_enabled = always
+}
+iferyx = {
+	if = { limit = { NOT = {
+				host_has_dlc = megacorp
+			}
+		}
+		spawn_enabled = always
+	}
+}
+glebsig = {
+	spawn_enabled = always
+}
+jehetma = {
+	spawn_enabled = always
+}
+scyldari = {
+	spawn_enabled = always
+}
+kel_azaan = {
+	spawn_enabled = always
+}
+blorg = {
+	spawn_enabled = always
+}
+tzynn = {
+	spawn_enabled = always
+}
