@@ -1,6 +1,6 @@
 static_galaxy_scenario = {
-	name = "Milky Way"
-	priority = 5
+	name = "Milky Way (Tiny)"
+	priority = 6
 	supports_shape = bar
 	num_empires = { min = 0 max = 24 }
 	num_empire_default = 12
@@ -12,7 +12,7 @@ static_galaxy_scenario = {
 	colonizable_planet_odds = 0.5
 	primitive_odds = 0.5
 	crisis_strength = 1.5
-	extra_crisis_strength = { 10 25}
+	extra_crisis_strength = { 10 25 }
 	num_wormhole_pairs = { min = 0 max = 5 }
 	num_wormhole_pairs_default = 1
 	num_gateways = { min = 0 max = 5 }
@@ -20,6 +20,9 @@ static_galaxy_scenario = {
 	random_hyperlanes = no
 	core_radius = 0
 
+
+#	system = { id = "0" name = "" position = { x = 0 y = 0 z = 5} initializer = init_sol_geocentric }
+#	mindwarden_sol_system_init
 	system = { id = "1" name = "" position = { x = 0 y = -260 z = 0} initializer = sol_system_initializer }
 	system = { id = "2" name = "" position = { x = -5 y = -265 z = 0} initializer = sol_neighbor_t1 }		
 	system = {
@@ -36,17 +39,15 @@ static_galaxy_scenario = {
 		trigger = { num_guaranteed_colonies < 2 }
 		id = "5" name = "" position = { x = 10 y = -270 z = 0} initializer = sol_neighbor_t2_no_guaranteed_colony }
 	system = { id = "6" name = "" position = { x = -35 y = -255 z = 0} initializer = une_deneb_system }
-	system = { id = "7" name = "" position = { x = -35 y = 33 z = 0}  }
-	system = { id = "8" name = "" position = { x = -35 y = 33 z = 0}  }
-	system = { id = "9" name = "" position = { x = -35 y = 33 z = 0}  }
-	system = { id = "10" name = "" position = { x = -35 y = 33 z = 0}  }
+	system = { id = "7" name = "" position = { x = -35 y = -250 z = 0}  }
+	system = { id = "8" name = "" position = { x = -35 y = -245 z = 0}  }
+	system = { id = "9" name = "" position = { x = -35 y = -260 z = 0}  }
+	system = { id = "10" name = "" position = { x = -40 y = -255 z = 0}  }
 	system = { id = "11" name = "" position = { x = -31 y = -288 z = -1} initializer = ai_titawin_init }
 	system = { id = "12" name = "" position = { x = 7 y = 33 z = 0}  }
-	system = { id = "13" name = "" position = { x = 7 y = 33 z = 0}  }
-	system = { id = "14" name = "" position = { x = 7 y = 33 z = 0}  }
+	system = { id = "13" name = "" position = { x = 7 y = 38 z = 0}  }
+	system = { id = "14" name = "" position = { x = 12 y = 33 z = 0}  }
 }
-trigger = { 
-	system = { id = "0" name = "" position = { x = 0 y = 0 z = 5} initializer = init_sol_geocentric } # can substitute mindwarden_sol_system_init
 
 
 # 	coordinate_transform = { #Subsequent systems will have the coordinates entered for them altered by these numbers
