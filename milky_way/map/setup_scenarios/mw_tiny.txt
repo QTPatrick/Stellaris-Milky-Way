@@ -1,7 +1,7 @@
 static_galaxy_scenario = {
 	name = "Milky Way (Tiny)"
 	priority = 6
-	supports_shape = bar
+	radius = 300
 	num_empires = { min = 0 max = 24 }
 	num_empire_default = 12
 	fallen_empire_default = 4
@@ -20,6 +20,8 @@ static_galaxy_scenario = {
 	random_hyperlanes = yes
 	core_radius = 20
 
+	supports_shape = elliptical
+	supports_shape = bar
 
 #	system = { id = "0" position = { x = 0 y = 0 z = 5} initializer = "init_sol_geocentric" }
 	system = { id = "1" position = { x = 0 y = 260 z = 0} initializer = "sol_system_initializer" }
