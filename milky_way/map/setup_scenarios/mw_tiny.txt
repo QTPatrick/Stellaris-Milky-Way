@@ -18,10 +18,18 @@ static_galaxy_scenario = {
 	num_gateways = { min = 0 max = 5 }
 	num_gateways_default = 1
 	random_hyperlanes = yes
-	core_radius = 20
+	core_radius = 0
 
 	supports_shape = elliptical
+	supports_shape = spiral_2
+	supports_shape = spiral_3
+	supports_shape = spiral_4
+	supports_shape = spiral_6
+	supports_shape = ring
 	supports_shape = bar
+	supports_shape = starburst
+	supports_shape = cartwheel
+	supports_shape = spoked
 
 #	system = { id = "0" position = { x = 0 y = 0 z = 5} initializer = "init_sol_geocentric" }
 	system = { id = "1" position = { x = 0 y = 260 z = 0} initializer = "sol_system_initializer" }
